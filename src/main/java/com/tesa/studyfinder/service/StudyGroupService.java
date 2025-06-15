@@ -40,11 +40,9 @@ public class StudyGroupService {
         if (group == null || group.getMembers().size() >= group.getMaxSize()) {
             return false;
         }
-        if (group.getMembers().add(userEmail)) {
-            userGroups.computeIfAbsent(userEmail, k -> new HashSet<>()).add(groupId);
-            return true;
-        }
-        return false;
+        group.getMembers().add(userEmail);
+        userGroups.computeIfAbsent(userEmail, k -> new HashSet<>()).add(groupId);
+        return true;
     }
 
     public boolean leaveGroup(String groupId, String userEmail) {
